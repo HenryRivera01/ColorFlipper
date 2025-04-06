@@ -1,21 +1,28 @@
-const colors = [
-    'green', 'red', 'rgba(133,122,200)', '#f15025'
-]
+const hexa = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'
+] 
 
-const btnChangeColor = document.getElementById('btn');
-const currentlyColorInfo = document.querySelector('.color'); 
- 
+//Seleccionandon el boton con con su ID
+const btnChangeColor = document.getElementById('button');
 
-btnChangeColor.addEventListener('click', function(){
-    //get random number betwen 0-3 (index of colors[])
-    const randomNumber = getRandomNumber();
-    console.log(randomNumber);
-    document.body.style.backgroundColor = colors[randomNumber];//Cuando se presione el boton asignamos el color random al background del body
-    currentlyColorInfo.textContent = colors[randomNumber]; //Para mostrar el color actual 
-});
+//Seleccionando el span con su clase se debe incluir el punto al inicio ya que es una clase
+const currentlyColor = document.querySelector('.CurrentlyColor');
+console.log(currentlyColor);
 
+btnChangeColor.addEventListener('click',()=>{
+    changeBgColor();
+})
+const randomNumber = Math.floor(Math.random())
 function getRandomNumber(){
-    //Utilizamos la librería math para generar un numero aleatorio 
-    return Math.floor(Math.random()*colors.length);
+    const randomNumber = Math.ceil(Math.random()*(hexa.length-1));
+    return randomNumber
 }
 
+function changeBgColor(){
+    let color = '#'
+    for (let i = 0; i <6; i++) {
+        color += hexa[getRandomNumber()];
+    }
+    document.body.style.backgroundColor = color;
+    currentlyColor.textContent = color;
+}
